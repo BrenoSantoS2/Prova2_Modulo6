@@ -9,9 +9,15 @@ eye_cascade_path = 'haarcascade_eye.xml'
 # Captura do vídeo
 cap = cv2.VideoCapture(video_path)
 
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+out = cv2.VideoWriter('HAAR.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+
 # Carregar o classificador Haar Cascade
 smile_cascade = cv2.CascadeClassifier(smile_cascade_path)
 eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
+
 
 # Verifica se o vídeo e o classificador foram carregados com sucesso
 if not cap.isOpened():
@@ -44,6 +50,9 @@ else:
         for (x, y, w, h) in eyes:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
         
+
+        out.write(frame)
+
         # Exibir o frame com rostos detectados
         cv2.imshow('Frame', frame)
         
@@ -54,5 +63,7 @@ else:
         frame_count += 1
 
 # Libera o objeto de captura e fecha todas as janelas
+out.release()
 cap.release()
+
 cv2.destroyAllWindows()

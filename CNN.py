@@ -18,6 +18,11 @@ def detect_faces(frame):
 # Captura de vídeo
 cap = cv2.VideoCapture(video_path)
 
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+out = cv2.VideoWriter('CNN.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+
 if not cap.isOpened():
     print("Erro ao abrir o arquivo de vídeo.")
 else:
@@ -36,6 +41,7 @@ else:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
         
         # Exibir o frame com as detecções
+        out.write(frame)
         cv2.imshow('Frame', frame)
         
         # Pressione 'q' no teclado para sair do vídeo
@@ -43,5 +49,6 @@ else:
             break
 
     # Libere a captura de vídeo e feche todas as janelas
+    out.release()
     cap.release()
     cv2.destroyAllWindows()
