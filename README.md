@@ -25,11 +25,14 @@ Identificação de rostos
 ```
 python CNN.py
 ```
+https://youtu.be/Lgb-SEVBuUU
 
 Identificação de Emoções/ Sorissos (Pergunta 3)
 ```
 python HAAR.py
 ```
+https://youtu.be/U_IlQqh1V1E
+
 ---
 ## Respostas para as perguntas:
 
